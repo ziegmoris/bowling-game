@@ -1,13 +1,24 @@
-import java.util.List;
-
 class Frame {
-    private List<String> rolls;
+    private Roll firstRoll;
+    private Roll secondRoll;
+    private Frame nextFrame = null;
 
-    Frame(List<String> rolls) {
-        this.rolls = rolls;
+    Frame(Roll firstRoll, Roll secondRoll){
+        this.firstRoll = firstRoll;
+        this.secondRoll = secondRoll;
     }
 
     Integer getScore() {
-        return rolls.stream().mapToInt(Integer::parseInt).sum();
+        if(this.nextFrame!=null){
+            return this.nextFrame.firstRoll.getValue()+this.nextFrame.secondRoll.getValue() + firstRoll.getValue() + secondRoll.getValue();
+        }
+        else{
+            return firstRoll.getValue() + secondRoll.getValue();
+        }
+
+    }
+
+    void setNextFrame(Frame nextFrame){
+        this.nextFrame = nextFrame;
     }
 }
